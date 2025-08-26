@@ -7,6 +7,7 @@ const MARGIN: float = 70
 @onready var paddle: Area2D = $Paddle
 @onready var score_sound: AudioStreamPlayer2D = $ScoreSound
 @onready var sound: AudioStreamPlayer = $Sound
+@onready var score_lable: Label = $ScoreLable
 
 
 func _ready() -> void:
@@ -30,6 +31,7 @@ func spawn_gem() -> void:
 	add_child(new_gem)
 	
 func stop_all() -> void:
+	score_lable.text = '000'
 	sound.stop()
 	sound.stream = EXPLODE
 	sound.play()
@@ -42,6 +44,12 @@ func stop_all() -> void:
 
 
 func _on_paddle_area_entered(area: Area2D) -> void:
+	#score_lable.text
+	var val = int(score_lable.text)
+	var strVal = "%03d" % (val + 1)
+	
+	score_lable.text = strVal
+
 	print("collision ", area)
 	if score_sound.playing == false:
 		score_sound.position = area.position
