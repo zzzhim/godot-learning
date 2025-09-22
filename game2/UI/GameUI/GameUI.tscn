@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://dipw5h4cknein"]
+
+[ext_resource type="LabelSettings" uid="uid://cwkcp1cdlwklf" path="res://UI/Main/red_title_32.tres" id="1_lisx7"]
+[ext_resource type="Script" uid="uid://ceguvxymrr4wn" path="res://UI/GameUI/GameUi.gd" id="1_mruwq"]
+[ext_resource type="LabelSettings" uid="uid://drrjw01wj5mex" path="res://UI/Main/white_title_48.tres" id="2_r7a7w"]
+[ext_resource type="LabelSettings" uid="uid://dt5onk6yyhmql" path="res://UI/Main/red_title_72.tres" id="3_81duk"]
+[ext_resource type="AudioStream" uid="uid://4j0o6smmxv75" path="res://assets/audio/score.wav" id="5_6h1i0"]
+
+[node name="GameUI" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mruwq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "0000"
+label_settings = ExtResource("1_lisx7")
+
+[node name="PressSpaceLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_top = -11.5
+offset_right = 45.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press Space"
+label_settings = ExtResource("2_r7a7w")
+
+[node name="GameOverLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -11.5
+offset_right = 43.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+label_settings = ExtResource("3_81duk")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6h1i0")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
